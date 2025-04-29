@@ -22,16 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function generateValidKey() {
-        // Valid start and end markers
         const validStarts = ['912', '913', '914'];
         const validEnds = ['891', '892', '893'];
-        // Randomly pick start and end
+        
         const start = validStarts[Math.floor(Math.random() * validStarts.length)];
         const end = validEnds[Math.floor(Math.random() * validEnds.length)];
-        // Generate 52 random digits for mapping (26 pairs)
+        
         let mapping = '';
         let used = [];
-        // Generate a random permutation of 0-25 for mapping
+
         let nums = Array.from({length: 26}, (_, i) => i);
         for (let i = nums.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mapping += val;
             }
         }
-        // Optionally add random digits before and after
+        
         const prefix = Math.random() < 0.5 ? randomDigits(Math.floor(Math.random() * 4)) : '';
         const suffix = Math.random() < 0.5 ? randomDigits(Math.floor(Math.random() * 4)) : '';
         return prefix + start + mapping + end + suffix;

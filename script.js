@@ -1,7 +1,6 @@
 // Enigma Encryption System - Main Script
 
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
     const enigmaKeyInput = document.getElementById('enigma-key');
     const messageInput = document.getElementById('message');
     const resultOutput = document.getElementById('result');
@@ -11,27 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const modeLabel = document.getElementById('mode-label');
     const keyStatus = document.getElementById('key-status');
     
-    // Event Listeners
     enigmaKeyInput.addEventListener('input', validateKey);
     processBtn.addEventListener('click', processMessage);
     copyBtn.addEventListener('click', copyResult);
     modeSwitch.addEventListener('change', updateMode);
     
-    // Initialize
     updateMode();
     
-    // Functions
     function validateKey() {
         const key = enigmaKeyInput.value.trim();
         
-        // Check if key is empty
         if (key === '') {
             keyStatus.textContent = 'Key not validated';
             keyStatus.className = 'key-status';
             return false;
         }
         
-        // Check if key starts with valid sequence
         const validStarts = ['912', '913', '073'];
         const validEnds = ['891', '892', '893'];
         
@@ -39,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let startFound = false;
         let startIndex = -1;
         
-        // Check for valid start sequence
         for (const start of validStarts) {
             if (key.includes(start)) {
                 startFound = true;
@@ -48,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Check for valid end sequence after the start sequence
         if (startFound) {
             const keyAfterStart = key.substring(startIndex);
             for (const end of validEnds) {
@@ -59,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Update UI
         if (isValid) {
             keyStatus.textContent = 'Valid key';
             keyStatus.className = 'key-status valid';
@@ -82,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function processMessage() {
-        // Validate inputs
         if (!validateKey()) {
             alert('Please enter a valid Enigma key');
             enigmaKeyInput.focus();
@@ -96,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        // Process the message based on mode
         const isDecryptMode = modeSwitch.checked;
         const key = enigmaKeyInput.value.trim();
         
@@ -113,26 +102,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function encryptMessage(message, key) {
-        // Extract the mapping from the key
         const mapping = extractMapping(key);
         
-        // Convert each character in the message
         return message.split('').map(char => {
             // Only encrypt letters
             if (/[a-zA-Z]/.test(char)) {
                 const isUpperCase = char === char.toUpperCase();
                 const normalizedChar = char.toLowerCase();
-                const charCode = normalizedChar.charCodeAt(0) - 97; // 'a' is 0, 'b' is 1, etc.
+                const charCode = normalizedChar.charCodeAt(0) - 97;
                 
                 if (charCode >= 0 && charCode < 26) {
-                    // Get the mapped value
                     const mappedValue = mapping[charCode];
-                    // Convert the mapped value back to a letter
                     const mappedChar = String.fromCharCode(mappedValue + 97);
                     return isUpperCase ? mappedChar.toUpperCase() : mappedChar;
                 }
             }
-            // Return non-letter characters unchanged
             return char;
         }).join('');
     }
@@ -162,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function extractMapping(key) {
-        // Find the start marker in the key
         const validStarts = ['912', '913', '073'];
         let startIndex = -1;
         let startMarker = '';
@@ -179,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
             throw new Error('Invalid key: No valid start marker found');
         }
         
-        // Find the end marker in the key
         const validEnds = ['891', '892', '893'];
         let endIndex = -1;
         
@@ -195,14 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
             throw new Error('Invalid key: No valid end marker found');
         }
         
-        // Extract the mapping section
         const mappingSection = key.substring(startIndex + startMarker.length, endIndex);
         
-        // Create the mapping array (26 letters)
         const mapping = new Array(26).fill(0);
         let mappingIndex = 0;
         
-        // Parse the mapping section
         for (let i = 0; i < mappingSection.length - 1 && mappingIndex < 26; i += 2) {
             const pair = mappingSection.substring(i, i + 2);
             const value = parseInt(pair, 10);
@@ -212,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mappingIndex++;
         }
         
-        // Check if we have a complete mapping
         if (mappingIndex < 26) {
             throw new Error(`Incomplete key: Only ${mappingIndex} out of 26 mappings found`);
         }
@@ -224,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resultOutput.select();
         document.execCommand('copy');
         
-        // Visual feedback
         const originalText = copyBtn.textContent;
         copyBtn.textContent = 'Copied!';
         setTimeout(() => {
