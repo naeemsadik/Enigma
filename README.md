@@ -27,7 +27,7 @@ The Enigma Encryption System lets you securely encrypt and decrypt messages usin
 ### Key Structure
 
 - A valid key contains:
-  - A start marker (`912`, `913`, or `073`)
+  - A start marker (`912`, `913`, or `914`)
   - 52 digits (26 pairs) representing letter mappings
   - An end marker (`891`, `892`, or `893`)
   - Optional random digits before/after for obfuscation
