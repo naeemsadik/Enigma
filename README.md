@@ -1,99 +1,72 @@
 # Enigma Encryption System
 
-![Enigma](https://img.shields.io/badge/Enigma-Encryption-blue)
-![Version](https://img.shields.io/badge/Version-1.0-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+A modern, web-based encryption tool inspired by the historical Enigma machine. Encrypt and decrypt messages using custom-generated numerical keys, all in your browser.
 
-A modern web-based encryption system inspired by the historical Enigma machine, allowing users to encrypt and decrypt messages using custom numerical keys.
+[Live Demo](https://naeemsadik.github.io/Enigma/index.html)
 
-## 🔐 Overview
+---
 
-The Enigma Encryption System provides a secure way to encrypt messages using a custom numerical key that follows specific patterns. The system uses a substitution cipher approach where each letter in the alphabet is mapped to another letter based on the numerical patterns in your key.
+## 🚀 Overview
+
+The Enigma Encryption System lets you securely encrypt and decrypt messages using a custom key. The system uses a substitution cipher, where each letter in the alphabet is mapped to another letter based on a unique key you generate.
+
+- **Main App:** [`index.html`](index.html)
+- **Key Generator:** [`keygen.html`](keygen.html)
 
 ## ✨ Features
 
-- **Custom Encryption Keys**: Create your own unique encryption keys with specific start and end markers
-- **Bidirectional Operation**: Both encrypt and decrypt messages with the same key
-- **Real-time Key Validation**: Instant feedback on key validity
-- **User-friendly Interface**: Clean, responsive design that works on all devices
-- **Copy Functionality**: Easily copy encrypted/decrypted results
+- **Custom Key Generation:** Generate strong, random keys with start/end markers.
+- **Bidirectional Operation:** Encrypt and decrypt with the same key.
+- **Real-time Key Validation:** Instantly see if your key is valid.
+- **User-friendly Interface:** Responsive, modern UI for desktop and mobile.
+- **Copy to Clipboard:** Easily copy results and generated keys.
+- **All Local:** No data leaves your browser.
 
-## 🚀 How It Works
+## 🗝️ How It Works
 
-1. **Key Structure**: 
-   - Valid keys must contain a start marker (222, 223, or 231)
-   - Followed by numerical values that define the letter mappings
-   - Ending with an end marker (232, 233, or 241)
+### Key Structure
 
-2. **Encryption Process**:
-   - Each letter in your message is converted according to the mapping defined in your key
-   - Non-alphabetic characters remain unchanged
-   - Case is preserved during encryption/decryption
+- A valid key contains:
+  - A start marker (`912`, `913`, or `073`)
+  - 52 digits (26 pairs) representing letter mappings
+  - An end marker (`891`, `892`, or `893`)
+  - Optional random digits before/after for obfuscation
 
-3. **Security**:
-   - The security of your messages depends on keeping your key private
-   - You can hide your key markers within longer sequences of random numbers
-
-## 📋 Usage
-
-### Creating a Valid Key
-
-A valid Enigma key follows this pattern:
+**Example Key:**
 ```
-[optional random digits]231[52 digits representing mappings]232[optional random digits]
+1239120102030405060708091011121314151617181920212223242525891123
 ```
 
-Example key:
-```
-9876543210231060708091011121314151617181920212223242526272829303132333435363738394041424344454647484950515253232987654321
-```
+### Encryption & Decryption
 
-### Encrypting a Message
+- **Encrypt:** Enter your key and message, set mode to "Encrypt", and click "Encrypt Message".
+- **Decrypt:** Enter the same key, paste the encrypted message, set mode to "Decrypt", and click "Decrypt Message".
+- Non-alphabetic characters are preserved.
+- Case is preserved.
 
-1. Enter your Enigma key in the key field
-2. Type your message in the message field
-3. Ensure the toggle is set to "Encrypt"
-4. Click "Encrypt Message"
-5. Copy the encrypted result
+### Key Generation
 
-### Decrypting a Message
-
-1. Enter the same Enigma key used for encryption
-2. Paste the encrypted message in the message field
-3. Switch the toggle to "Decrypt"
-4. Click "Decrypt Message"
-5. View the original message
+- Use the [Key Generator](keygen.html) to create a valid key.
+- Click "Generate Key" and copy the result for use in the main app.
 
 ## 🛠️ Technical Details
 
-The system uses a substitution cipher where:
-- Each letter in the alphabet (a-z) is mapped to another letter
-- The mapping is derived from the numerical values in your key
-- The system extracts the mapping between valid start and end markers
-- Each pair of digits in the key represents a mapping value
+- **Cipher:** Substitution cipher based on key-defined mapping.
+- **Mapping Extraction:** The app extracts the mapping from the digits between the start and end markers.
+- **Validation:** Only keys with valid markers and 26 pairs are accepted.
 
-## 🔍 Key Validation
+## 📋 Usage
 
-Your key must:
-- Contain one of the valid start markers (222, 223, 231)
-- Contain one of the valid end markers (232, 233, 241)
-- Have the end marker appear after the start marker
+1. Go to [Enigma Encryption System](https://naeemsadik.github.io/Enigma/index.html)
+2. (Optional) Generate a key at [Key Generator](https://naeemsadik.github.io/Enigma/keygen.html)
+3. Enter your key and message.
+4. Choose Encrypt or Decrypt.
+5. Copy your result.
 
-## 🌐 Browser Compatibility
+## 📱 Mobile & Browser Support
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Opera (latest)
-
-## 📱 Mobile Support
-
-The interface is fully responsive and works on:
-- iOS devices
-- Android devices
-- Tablets
-- Desktop browsers
+- Fully responsive for desktop, tablet, and mobile.
+- Works on Chrome, Firefox, Safari, Edge, Opera.
 
 ## 🔒 Privacy
 
@@ -101,40 +74,25 @@ All encryption and decryption happens locally in your browser. No data is sent t
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Here are some planned improvements we'd love help with:
+Contributions, issues, and feature requests are welcome!
+
+- Fork the repo
+- Create a feature branch
+- Submit a pull request
 
 ### Future Improvements
 
-- Add support for multiple encryption algorithms
-- Create a mobile app version
-- Add offline mode capabilities
-- Enhance security with additional validation layers
-- Create a command-line interface (CLI) version
-- Add unit tests and integration tests
-- Implement file encryption/decryption support
-- Add support for encryption/decryption of images
-- Create API endpoints for programmatic access
-
-Feel free to:
-- Fork the repository
-- Create a feature branch
-- Submit pull requests
-- Report bugs
-- Suggest new features
-- Help with documentation
-
-Please read our contributing guidelines before making any changes.
-
-## 📧 Contact
-
-For questions or feedback, please open an issue in the repository.
+- Support for multiple encryption algorithms
+- Offline mode
+- CLI version
+- File and image encryption
+- API endpoints
+- Enhanced validation and security
 
 ---
 
-**Note**: This encryption system is designed for educational purposes and casual use. For truly sensitive information, please use established encryption standards like AES, RSA, or other professionally audited cryptographic solutions.
-
-        
+**Note:** This system is for educational and casual use. For sensitive data, use established cryptographic standards like AES or RSA.
