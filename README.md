@@ -105,7 +105,29 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!
+Contributions, issues, and feature requests are welcome! Here are some planned improvements we'd love help with:
+
+### Future Improvements
+
+- Add support for multiple encryption algorithms
+- Create a mobile app version
+- Add offline mode capabilities
+- Enhance security with additional validation layers
+- Create a command-line interface (CLI) version
+- Add unit tests and integration tests
+- Implement file encryption/decryption support
+- Add support for encryption/decryption of images
+- Create API endpoints for programmatic access
+
+Feel free to:
+- Fork the repository
+- Create a feature branch
+- Submit pull requests
+- Report bugs
+- Suggest new features
+- Help with documentation
+
+Please read our contributing guidelines before making any changes.
 
 ## 📧 Contact
 

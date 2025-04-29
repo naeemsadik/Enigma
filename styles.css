@@ -254,3 +254,17 @@ footer {
         width: 100%;
     }
 }
+
+.btn-nav {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}

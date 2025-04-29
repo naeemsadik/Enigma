@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Check if key starts with valid sequence
-        const validStarts = ['222', '223', '231'];
-        const validEnds = ['232', '233', '241'];
+        const validStarts = ['912', '913', '073'];
+        const validEnds = ['891', '892', '893'];
         
         let isValid = false;
         let startFound = false;
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (startFound) {
             const keyAfterStart = key.substring(startIndex);
             for (const end of validEnds) {
-                if (keyAfterStart.includes(end) && keyAfterStart.indexOf(end) > 3) { // Ensure end is after start
+                if (keyAfterStart.includes(end) && keyAfterStart.indexOf(end) > 3) {
                     isValid = true;
                     break;
                 }
@@ -138,39 +138,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function decryptMessage(message, key) {
-        // Extract the mapping from the key
         const mapping = extractMapping(key);
         
-        // Create a reverse mapping for decryption
         const reverseMapping = new Array(26);
         for (let i = 0; i < 26; i++) {
             reverseMapping[mapping[i]] = i;
         }
         
-        // Convert each character in the message
         return message.split('').map(char => {
-            // Only decrypt letters
             if (/[a-zA-Z]/.test(char)) {
                 const isUpperCase = char === char.toUpperCase();
                 const normalizedChar = char.toLowerCase();
-                const charCode = normalizedChar.charCodeAt(0) - 97; // 'a' is 0, 'b' is 1, etc.
+                const charCode = normalizedChar.charCodeAt(0) - 97;
                 
                 if (charCode >= 0 && charCode < 26) {
-                    // Get the reverse mapped value
                     const mappedValue = reverseMapping[charCode];
-                    // Convert the mapped value back to a letter
                     const mappedChar = String.fromCharCode(mappedValue + 97);
                     return isUpperCase ? mappedChar.toUpperCase() : mappedChar;
                 }
             }
-            // Return non-letter characters unchanged
             return char;
         }).join('');
     }
     
     function extractMapping(key) {
         // Find the start marker in the key
-        const validStarts = ['222', '223', '231'];
+        const validStarts = ['912', '913', '073'];
         let startIndex = -1;
         let startMarker = '';
         
@@ -187,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Find the end marker in the key
-        const validEnds = ['232', '233', '241'];
+        const validEnds = ['891', '892', '893'];
         let endIndex = -1;
         
         for (const end of validEnds) {
@@ -211,9 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Parse the mapping section
         for (let i = 0; i < mappingSection.length - 1 && mappingIndex < 26; i += 2) {
-            const value = parseInt(mappingSection.substring(i, i + 2), 10);
+            const pair = mappingSection.substring(i, i + 2);
+            const value = parseInt(pair, 10);
             // Ensure the value is within range (0-25)
             mapping[mappingIndex] = value % 26;
+            // console.log(`Letter ${String.fromCharCode(97 + mappingIndex)} (index ${mappingIndex}): pair=${pair}, value=${value}, mapped to ${String.fromCharCode(97 + (value % 26))} (index ${value % 26})`);
             mappingIndex++;
         }
         
